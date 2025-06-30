@@ -91,7 +91,8 @@ const ProductCatalog = ({ products }) => {
                   
                   <div className="text-3xl font-bold gradient-text">
                     {product.price}
-                    <span className="text-sm text-gray-400 font-normal">/bulan</span>
+                    <span className="text-sm text-gray-400 font-normal">/lisensi</span>
+
                   </div>
                   
                   <p className="text-gray-300 leading-relaxed flex-grow min-h-[6rem]">{product.description}</p>
