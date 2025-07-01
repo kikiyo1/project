@@ -15,11 +15,12 @@ const ProductFormDialog = ({ isOpen, setIsOpen, product, onSave }) => {
     price: '',
     category: '',
     image: '',
-    features: ''
+    features: '',
+    checkoutUrl: ''
   });
   const [imagePreview, setImagePreview] = useState('');
   const fileInputRef = useRef(null);
-  
+
   const isEditing = !!product;
 
   useEffect(() => {
@@ -28,12 +29,12 @@ const ProductFormDialog = ({ isOpen, setIsOpen, product, onSave }) => {
         setFormData(product);
         setImagePreview(product.image || '');
       } else {
-        setFormData({ name: '', description: '', price: '', category: '', image: '', features: '' });
+        setFormData({ name: '', description: '', price: '', category: '', image: '', features: '', checkoutUrl: '' });
         setImagePreview('');
       }
     }
   }, [isOpen, product, isEditing]);
-  
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -105,7 +106,7 @@ const ProductFormDialog = ({ isOpen, setIsOpen, product, onSave }) => {
               />
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="category" className="text-white">Kategori</Label>
@@ -140,7 +141,7 @@ const ProductFormDialog = ({ isOpen, setIsOpen, product, onSave }) => {
               </div>
             </div>
           </div>
-          
+
           <div>
             <Label htmlFor="description" className="text-white">Deskripsi *</Label>
             <Textarea
@@ -153,7 +154,7 @@ const ProductFormDialog = ({ isOpen, setIsOpen, product, onSave }) => {
               required
             />
           </div>
-          
+
           <div>
             <Label htmlFor="features" className="text-white">Fitur Utama</Label>
             <Textarea
@@ -165,7 +166,18 @@ const ProductFormDialog = ({ isOpen, setIsOpen, product, onSave }) => {
               rows={2}
             />
           </div>
-          
+
+          <div>
+            <Label htmlFor="checkoutUrl" className="text-white">Checkout URL (Mayar)</Label>
+            <Input
+              id="checkoutUrl"
+              value={formData.checkoutUrl}
+              onChange={(e) => setFormData({...formData, checkoutUrl: e.target.value})}
+              className="bg-slate-700 border-slate-600 text-white"
+              placeholder="https://..."
+            />
+          </div>
+
           <div className="flex gap-4 pt-4">
             <Button 
               type="submit"
