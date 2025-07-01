@@ -4,6 +4,11 @@ import { ShoppingCart, Star, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import PaymentMethods from '@/components/PaymentMethods';
+import MayarEmbedButton from "@/components/MayarEmbedButton";
+
+...
+
+<MayarEmbedButton />
 
 const ProductCatalog = ({ products }) => {
   const { toast } = useToast();
