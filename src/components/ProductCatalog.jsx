@@ -4,22 +4,21 @@ import { ShoppingCart, Star, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import PaymentMethods from '@/components/PaymentMethods';
-import MayarEmbedButton from "@/components/MayarEmbedButton";
-
-...
-
-<MayarEmbedButton />
 
 const ProductCatalog = ({ products }) => {
   const { toast } = useToast();
 
-  const handlePurchase = (productName) => {
-    toast({
-      title: "🛒 Tertarik dengan " + productName + "?",
-      description: "Hubungi tim sales kami untuk informasi pembelian dan demo!",
-    });
+  const handlePurchase = (url) => {
+    if (url) {
+      window.open(`${url}?iframe=true`, '_blank');
+    } else {
+      toast({
+        title: "Checkout tidak tersedia",
+        description: "URL checkout belum ditentukan untuk produk ini."
+      });
+    }
   };
-  
+
   const handleWhatsAppRedirect = () => {
     window.open('https://wa.me/6285161244123?text=Halo,%20saya%20tertarik%20dengan%20paket%20custom%20SOFTWARE%20HADESOLUTION.', '_blank');
   };
@@ -97,7 +96,6 @@ const ProductCatalog = ({ products }) => {
                   <div className="text-3xl font-bold gradient-text">
                     {product.price}
                     <span className="text-sm text-gray-400 font-normal">/lisensi</span>
-
                   </div>
                   
                   <p className="text-gray-300 leading-relaxed flex-grow min-h-[6rem]">{product.description}</p>
@@ -123,7 +121,7 @@ const ProductCatalog = ({ products }) => {
               
               <div className="mt-6">
                 <Button 
-                  onClick={() => handlePurchase(product.name)}
+                  onClick={() => handlePurchase(product.checkoutUrl)}
                   className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold transition-all duration-300"
                 >
                   <ShoppingCart className="mr-2 w-5 h-5" />
